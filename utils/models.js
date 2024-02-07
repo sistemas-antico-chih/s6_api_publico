@@ -1,49 +1,66 @@
 const { Schema, model } = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
  
-const spicSchema = new Schema({
-   fechaCaptura: String,
-   ejercicioFiscal: String,
-   ramo: { clave: Number, valor: String },
-   rfc: String,
-   curp: String,
-   nombres: String,
-   primerApellido: String,
-   segundoApellido: String,
-   genero: {
-       clave: String,
-       valor: String
+const contratacionesSchema = new Schema({
+   ocid: String,
+   id: String,
+   date: Date,
+   initiationType: String,
+   language: String,
+   cycle: Number,
+   tag: { type: [], default: void 0 },
+   parties: { type: [], default: void 0 },
+   tender: {
+       id: String,
+       title: String,
+       description: String,
+       status: String,
+       enquiryPeriod: String,
+       procuringEntity: {id: String, name: String},
+       items: { type: [], default: void 0 },
+       value: {amount: Number, currency: String},
+       minValue: {amount: Number, currency: String},
+       procurementMethod: String,
+       procurementMethodDetails: String,
+       procurementMethodRationale: String,
+       submissionMethod: { type: [], default: void 0 },
+       submissionMethodDetails: String,
+       tenderers: { type: [], default: void 0 },
+       mainProcurementCategory: String,
+       aditionalProcurementCategories: { type: [], default: void 0 },
+       awardCriteria: String,
+       awardCriteriaDetails: String,
+       tenderPeriod: {startDate: Date, endDate: Date},
+       awardPeriod: {startDate: Date, endDate: Date},
+       numberOfTenderers: Number, 
+       hasEnquiries: Boolean,
+       contractPeriod: {startDate: Date, endDate: Date},
    },
-   institucionDependencia: {
-       nombre: String,
-       clave: String,
-       siglas: String
+   awards: { type: [], default: void 0 },
+   contracts: { type: [], default: void 0 },
+   buyer: {id: String, name: String},
+   planning: {
+       rationale: String,
+       documents: { type: [], default: void 0 },
+       milestone: { type: [], default: void 0 },
+       budget: {
+           description: String,
+           amount: { amount: Number, currency: String},
+           uri: String
+       }
    },
-   puesto: {
-       nombre: String,
-       nivel: String
-   },
-   tipoArea: { type: [], default: void 0 },
-   tipoProcedimiento: { type: [], default: void 0 },
-   nivelResponsabilidad: { type: [], default: void 0 },
-   superiorInmediato: {
-       nombres: String,
-       primerApellido: String,
-       segundoApellido: String,
-       curp: String,
-       rfc: String,
-       puesto: {
-           nombre: String,
-           nivel: String
-      }
+   publisher: {
+       name: String,
+       uid: String,
+       uri: String
    }
 });
 
-spicSchema.plugin(mongoosePaginate);
+contratacionesSchema.plugin(mongoosePaginate);
 
-let Spic = model('Spic', spicSchema, 'spic');
+let contrataciones = model('S6', contratacionesSchema, 'contrataciones');
 
 module.exports = {
-   spicSchema,
-   Spic
+   contratacionesSchema,
+   contrataciones
 };

@@ -13,7 +13,7 @@ const localize = require('ajv-i18n');
 
 const jsyaml = require('js-yaml');
 const fs = require('fs');
-const { post_spic, get_dependencias } = require('./controllers/Spic');
+const { post_contrataciones, get_dependencias } = require('./controllers/contrataciones_controller');
 
 //require('dotenv').config({ path: './utils/.env' });
 
@@ -33,7 +33,7 @@ const standar = 'api/openapi.yaml';
 const spec = fs.readFileSync(standar, 'utf8');
 const swaggerDoc = jsyaml.safeLoad(spec);
 
-const serverPort = 8080;
+const serverPort = 8092;
 
 let spic_auth = swaggerDoc.components.securitySchemes.spic_auth;
 
@@ -48,9 +48,10 @@ swaggerDoc.components.securitySchemes = {
 
 // console.log(swaggerDoc.components.securitySchemes);
 
-let spic = '/v1/spic';
+//let spic = '/v1/spic';
 let dependencias = '/v1/spic/dependencias';
-swaggerDoc.paths[spic].post.security.push({ BearerAuth: [] });
+let contrataciones = '/v1/contrataciones';
+swaggerDoc.paths[contrataciones].post.security.push({ BearerAuth: [] });
 // console.log(swaggerDoc.paths[spic].post.security);
 
 swaggerDoc.paths[dependencias].get.security.push({ BearerAuth: [] });
@@ -82,8 +83,8 @@ app.use((req, res, next) => {
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
-app.post('/v1/spic', swaggerValidation.validate, post_spic);
-app.get('/v1/spic/dependencias', swaggerValidation.validate, get_dependencias);
+app.post('/v1/contrataciones', swaggerValidation.validate, post_contrataciones);
+app.get('/v1/contrataciones/dependencias', swaggerValidation.validate, get_dependencias);
 
 app.use((err, req, res, next) => {
 	res.status(err.status || 500).json({
