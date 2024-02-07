@@ -35,7 +35,7 @@ const swaggerDoc = jsyaml.safeLoad(spec);
 
 const serverPort = 8092;
 
-//let spic_auth = swaggerDoc.components.securitySchemes.spic_auth;
+let spic_auth = swaggerDoc.components.securitySchemes.spic_auth;
 
 swaggerDoc.components.securitySchemes = {
 	spic_auth,
