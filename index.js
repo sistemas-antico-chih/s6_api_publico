@@ -1,5 +1,5 @@
 'use strict';
-const http = require('http');
+const https = require('https');
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -49,10 +49,10 @@ swaggerDoc.components.securitySchemes = {
 
 // console.log(swaggerDoc.components.securitySchemes);
 
-//let spic = '/v1/spic';
+let spic = '/v1/spic';
 let dependencias = '/v1/contrataciones/dependencias';
 let contrataciones = '/v1/contrataciones';
-swaggerDoc.paths[contrataciones].post.security.push({ BearerAuth: [] });
+swaggerDoc.paths[spic].post.security.push({ BearerAuth: [] });
 // console.log(swaggerDoc.paths[spic].post.security);
 
 swaggerDoc.paths[dependencias].get.security.push({ BearerAuth: [] });
@@ -82,7 +82,7 @@ app.use((req, res, next) => {
 	next();
 });
 
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+//app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 app.post('/v1/contrataciones', swaggerValidation.validate, post_contrataciones);
 app.get('/v1/contrataciones/dependencias', swaggerValidation.validate, get_dependencias);
@@ -94,7 +94,19 @@ app.use((err, req, res, next) => {
 	});
 });
 
+/*
 http.createServer(app).listen(serverPort, () => {
 	console.log(`Servidor iniciado...\t\t\t\t(http://localhost:${serverPort})`);
 	console.log(`Documentacion Swagger disponible...\t\t(http://localhost:${serverPort}/docs)`);
+});
+*/
+
+https.createServer({
+
+	key: fs.readFileSync('./certs/anticorrupcion.org_trustico.key'),
+	cert: fs.readFileSync('./certs/anticorrupcion.org_trustico.cer'),
+
+},app).listen(serverPort, () => {
+ console.log(`Servidor iniciado...\t\t\t\t(http://localhost:${serverPort})`);
+ console.log(`Documentacion Swagger disponible...\t\t(http://localhost:${serverPort}/docs)`);
 });
