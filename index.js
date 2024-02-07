@@ -37,7 +37,7 @@ const serverPort = 8092;
 
 //let spic_auth = swaggerDoc.components.securitySchemes.spic_auth;
 
-/*swaggerDoc.components.securitySchemes = {
+swaggerDoc.components.securitySchemes = {
 	spic_auth,
 	BearerAuth: {
 		type: 'http',
@@ -45,7 +45,7 @@ const serverPort = 8092;
 		bearerFormat: 'JWT'
 	}
 };
-*/
+
 
 // console.log(swaggerDoc.components.securitySchemes);
 
