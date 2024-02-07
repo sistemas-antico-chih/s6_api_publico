@@ -49,7 +49,7 @@ swaggerDoc.components.securitySchemes = {
 // console.log(swaggerDoc.components.securitySchemes);
 
 //let spic = '/v1/spic';
-let dependencias = '/v1/spic/dependencias';
+let dependencias = '/v1/contrataciones/dependencias';
 let contrataciones = '/v1/contrataciones';
 swaggerDoc.paths[contrataciones].post.security.push({ BearerAuth: [] });
 // console.log(swaggerDoc.paths[spic].post.security);

@@ -18,7 +18,7 @@ function diacriticSensitiveRegex(string = '') {
         .replace(/U/g, '[u,ü,ú,ù]')
 }
 
-async function getDependencias() {
+async function getDependencias () {
     let dependencias = await contrataciones.find({ 'buyer.name': { $exists: true } }).distinct('buyer.name').exec();
     return dependencias;
 }
