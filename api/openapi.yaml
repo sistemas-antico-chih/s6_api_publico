@@ -2,8 +2,7 @@ openapi: 3.0.0
 info:
   version: "1.1"
   title: >-
-    API del Registro de Servidores públicos de la Administración Pública Federal
-    que intervienen en procedimientos de contrataciones públicas.
+    API del Registro de Contrataciones Públicas.
 paths:
   /v1/spic:
     post:
