@@ -19,7 +19,7 @@ function diacriticSensitiveRegex(string = '') {
 }
 
 async function getDependencias() {
-    let dependencias = await contrataciones.find({ 'buyer.name': { $exists: true } }).distinct('buyer.name').exec();
+    let dependencias = await contrataciones.find({ 'buyer': { $exists: true } }).distinct('buyer').exec();
     return dependencias;
 }
 
