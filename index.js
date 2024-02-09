@@ -33,7 +33,7 @@ const standar = 'api/openapi.yaml';
 const spec = fs.readFileSync(standar, 'utf8');
 const swaggerDoc = jsyaml.safeLoad(spec);
 
-const serverPort = 8092;
+const serverPort = 8080;
 
 let spic_auth = swaggerDoc.components.securitySchemes.spic_auth;
 
