@@ -54,7 +54,7 @@ const contratacionesSchema = new Schema({
        uid: String,
        uri: String
    }
-});
+}, { collation: { locale: 'es', strength: 4 } });
 
 contratacionesSchema.plugin(mongoosePaginate);
 
